@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" /><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="bg-slate-200 p-20 ">
+        <div class="bg-white p-10 rounded-xl">
+            <div class="flex justify-end mt-5 ">
+                <a href="login.php"><svg xmlns="http://www.w3.org/2000/svg" height="23" width="20.5"
+                    viewBox="0 0 448 512">
+                    <path fill="#05b8d6"
+                        d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
+                </svg></a></div>
+            <div class="text-center mb-5" style="font-family: Georgia, serif; font-size: 30px">
+                Selamat Datang!
+            </div>
+            <div class="space-y-4">
+                <form action="proses_kritik.php" method="post">
+                    <label for="nama" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama
+                    </label>
+                    <input type="text" id="nama"
+                        class="block w-full p-2 mb-4 text-gray-900 border border-gray-300 rounded-md bg-gray-50 text-xs focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        required>
+                    <label for="kritik" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Kritik
+                    </label>
+                    <textarea id="kritik" rows="4"
+                        class="block p-2.5 w-full text-sm mb-4 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                        placeholder="Masukkan Kritik Anda!" required></textarea>
+                        <label for="saran" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Saran
+                        </label>
+                        <textarea id="saran" rows="4"
+                            class="block p-2.5 w-full text-sm mb-4 text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            placeholder="Masukkan Saran Anda!" required></textarea> 
+                    <div class="flex justify-end mt-5"><button type="button"
+                            class="text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 shadow-lg shadow-cyan-500/50 dark:shadow-lg dark:shadow-cyan-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Kirim</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+</body>
+
+</html>
