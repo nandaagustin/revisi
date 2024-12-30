@@ -121,7 +121,7 @@ $status = isset($_GET['status_kirim']) ? $_GET['status_kirim'] : '';
 
     </div>
     <div class="bg-gradient-to-r from-green-200 via-green-100 to-blue-200 px-8 lg:px-32 pb-24">
-        <div class="text-center py-9 lg:py-16">
+        <div class="text-center pt-9 pb-10 lg:pt-16 ">
             <h1 class="kritik-saran-item text-green-700 text-lg lg:text-3xl font-bold">Kritik dan Saran Pengguna</h1>
             <p class="kritik-saran-item text-base lg:text-lg text-gray-600 font-semibold">Bersama Membangun yang Lebih Baik</p>
         </div>
@@ -147,8 +147,8 @@ $status = isset($_GET['status_kirim']) ? $_GET['status_kirim'] : '';
 
                     <div class="flex items-center justify-between mb-4">
                         <div>
-                            <h3 class="text-lg font-semibold text-green-700"><?php echo $row['nama']; ?></h3>
-                            <p class="text-sm text-gray-500"><?php echo $row['create_at']; ?></p>
+                            <h3 class="md:text-lg text-base font-semibold text-green-700"><?php echo $row['nama']; ?></h3>
+                            <p class="md:text-sm text-xs text-gray-500"><?php echo $row['create_at']; ?></p>
                         </div>
                         <div class="flex items-center gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-green-500" viewBox="0 0 24 24" fill="currentColor">
@@ -156,16 +156,16 @@ $status = isset($_GET['status_kirim']) ? $_GET['status_kirim'] : '';
                                     d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm0-4h-2V7h2v8z"
                                     clip-rule="evenodd" />
                             </svg>
-                            <span class="text-gray-500 text-sm">Kritik & Saran</span>
+                            <span class="text-gray-500 text-xs md:text-sm">Kritik & Saran</span>
                         </div>
                     </div>
                     <!-- Kritik & Saran -->
                     <div class="lg:mb-4 mb-3">
-                        <p class="text-gray-700 mb-2">
-                            <span class="text-green-700">Kritik : </span> <?php echo $row['kritik']; ?>
+                        <p class="text-gray-700 mb-2 text-sm md:text-base">
+                            <span class="text-green-700 ">Kritik : </span> <?php echo $row['kritik']; ?>
                         </p>
-                        <p class="text-gray-700">
-                            <span class="text-blue-700">Saran : </span> <?php echo $row['saran']; ?>
+                        <p class="text-gray-700 text-sm md:text-base">
+                            <span class="text-blue-700 ">Saran : </span> <?php echo $row['saran']; ?>
                         </p>
                     </div>
                     <!-- Balasan Section -->
@@ -189,7 +189,7 @@ $status = isset($_GET['status_kirim']) ? $_GET['status_kirim'] : '';
             <?php endwhile; ?>
 
             <!-- Pagination Controls -->
-            <div class="flex justify-center mt-6 mb-16">
+            <div class="flex justify-center mt-6 mb-14">
                 <div class="flex items-center space-x-2">
                     <?php
                     // Hitung total jumlah card
@@ -215,8 +215,8 @@ $status = isset($_GET['status_kirim']) ? $_GET['status_kirim'] : '';
         </div>
         <div class="flex  justify-center pb-16">
             
-            <div class="w-[900px] h-[700px]">
-            <p class="text-2xl font-bold text-green-700 py-5 text-center">Lokasi Kantor Kecamatan Bantarbolang</p>
+            <div class="lg:w-[900px] lg:h-[700px] w-[300px] h-[400px]">
+            <p class="lg:text-3xl text-lg font-bold text-green-700 py-5 text-center">Lokasi Kantor Kecamatan Bantarbolang</p>
             <iframe class="w-full h-full" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.7875193353407!2d109.37563087481068!3d-7.034242092967677!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fe809d63ff30b%3A0x6526ecbee267187!2sKantor%20Kecamatan%20Bantarbolang!5e0!3m2!1sid!2sid!4v1734242374914!5m2!1sid!2sid"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
             </div>
@@ -229,24 +229,24 @@ $status = isset($_GET['status_kirim']) ? $_GET['status_kirim'] : '';
         class="flex flex-col items-center  bg-[#0a382d] text-left text-surface  text-white">
         <div class="mx-auto w-full p-8">
             <div class="md:flex md:justify-between">
-                <div class="mb-6 mr-20 md:mb-0">
+                <div class="mb-6 mr-24 md:mb-0">
                     <a href="index.php" class="flex items-center">
-                        <img src="logo.png" class="h-8 me-3" alt="FlowBite Logo" />
-                        <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Kecamatan Bantarbolang</span>
+                        <img src="logo.png" class="h-16 lg:h-20 me-3" alt="FlowBite Logo" />
+                        <span class="self-center text-xl lg:text-2xl font-semibold whitespace-nowrap dark:text-white">Kecamatan Bantarbolang</span>
                     </a>
                 </div>
                 <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
                     <div>
-                        <h2 class="mb-6 text-sm font-semibold uppercase text-white">Alamat</h2>
-                        <ul class="text-white font-normal">
+                        <h2 class="mb-6 text-xs md:text-base font-semibold uppercase text-white">Alamat</h2>
+                        <ul class="text-white text-xs md:text-base font-normal">
                             <li>
                                 <a href="https://maps.app.goo.gl/enaUjietn8RcSzfP9" class="hover:underline">Jl. Raya Bantarbolang No 17 Pemalang</a>
                             </li>
                         </ul>
                     </div>
                     <div>
-                        <h2 class="mb-6 text-sm font-semibold  uppercase text-white">Jam Operasional</h2>
-                        <ul class=" text-white font-normal">
+                        <h2 class="mb-6 text-xs md:text-base  font-semibold  uppercase text-white">Jam Operasional</h2>
+                        <ul class=" text-white text-xs md:text-base font-normal">
                             <li class="mb-2">
                                 Senin-Jum'at 08.00-16.00
                             </li>
@@ -256,8 +256,8 @@ $status = isset($_GET['status_kirim']) ? $_GET['status_kirim'] : '';
                         </ul>
                     </div>
                     <div>
-                        <h2 class="mb-6 text-sm font-semibold  uppercase text-white">Tentang Kami</h2>
-                        <ul class=" text-white font-normal">
+                        <h2 class="mb-6 text-xs md:text-base font-semibold  uppercase text-white">Tentang Kami</h2>
+                        <ul class=" text-white text-xs md:text-base font-normal">
                             <li class="mb-4">
                                 Website ini dibuat untuk membantu masyarakat sekitar memberikan Kritik & Saran
                             </li>
@@ -267,9 +267,9 @@ $status = isset($_GET['status_kirim']) ? $_GET['status_kirim'] : '';
             </div>
             <hr class="my-2 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-2" />
         </div>
-        <div class="container">
+        <div class="container flex justify-center items-center space-x-2" >
             <!-- Social media icons container -->
-            <div class="flex justify-center space-x-2">
+          
                 <a
                     href="https://facebook.com/bantarbolang17"
                     type="button"
@@ -325,7 +325,7 @@ $status = isset($_GET['status_kirim']) ? $_GET['status_kirim'] : '';
                     class="rounded-full bg-transparent p-3 font-medium uppercase leading-normal text-surface transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-none focus:ring-0 dark:text-white dark:hover:bg-secondary-900"
                     data-twe-ripple-init>
                     <span class="mx-auto [&>svg]:h-5 [&>svg]:w-5">
-                        <svg class="w-6 h-6 text-gray-800 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <svg  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M13.795 10.533 20.68 2h-3.073l-5.255 6.517L7.69 2H1l7.806 10.91L1.47 22h3.074l5.705-7.07L15.31 22H22l-8.205-11.467Zm-2.38 2.95L9.97 11.464 4.36 3.627h2.31l4.528 6.317 1.443 2.02 6.018 8.409h-2.31l-4.934-6.89Z" />
                         </svg>
 
@@ -338,17 +338,17 @@ $status = isset($_GET['status_kirim']) ? $_GET['status_kirim'] : '';
                     class="rounded-full bg-transparent p-3 font-medium uppercase leading-normal text-surface transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-none focus:ring-0 dark:text-white dark:hover:bg-secondary-900"
                     data-twe-ripple-init>
                     <span class="mx-auto [&>svg]:h-5 [&>svg]:w-5">
-                        <svg class="w-6 h-6 text-gray-800 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                             <path fill-rule="evenodd" d="M21.7 8.037a4.26 4.26 0 0 0-.789-1.964 2.84 2.84 0 0 0-1.984-.839c-2.767-.2-6.926-.2-6.926-.2s-4.157 0-6.928.2a2.836 2.836 0 0 0-1.983.839 4.225 4.225 0 0 0-.79 1.965 30.146 30.146 0 0 0-.2 3.206v1.5a30.12 30.12 0 0 0 .2 3.206c.094.712.364 1.39.784 1.972.604.536 1.38.837 2.187.848 1.583.151 6.731.2 6.731.2s4.161 0 6.928-.2a2.844 2.844 0 0 0 1.985-.84 4.27 4.27 0 0 0 .787-1.965 30.12 30.12 0 0 0 .2-3.206v-1.516a30.672 30.672 0 0 0-.202-3.206Zm-11.692 6.554v-5.62l5.4 2.819-5.4 2.801Z" clip-rule="evenodd" />
                         </svg>
 
                     </span>
                 </a>
-            </div>
+            
         </div>
 
         <!--Copyright section-->
-        <div class="w-full bg-[#0a382d] p-4 text-center">
+        <div class="w-full bg-[#0a382d] text-xs md:text-sm p-4 text-center">
             © 2024 Copyright:
             <a href="https://tw-elements.com/">Kecamatan Bantarbolang</a>
         </div>

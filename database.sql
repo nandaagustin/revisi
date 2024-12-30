@@ -7,7 +7,7 @@ CREATE TABLE admin(
 );
 CREATE TABLE kritik_saran (
     id int auto_increment PRIMARY KEY,
-    name varchar(20) not null,
+    nama varchar(20) not null,
     kritik varchar(255) not null,
     saran varchar(255) not null,
     balasan varchar(255) default null,
