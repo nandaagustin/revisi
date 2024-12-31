@@ -56,8 +56,6 @@ $result = mysqli_query($conn, "SELECT * FROM kritik_saran ORDER BY create_at DES
                 </div>
                 <div class="flex items-center">
                     <div class="flex items-center ms-3">
-
-
                         <button id="theme-toggle" data-tooltip-target="tooltip-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
                             <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
@@ -70,7 +68,6 @@ $result = mysqli_query($conn, "SELECT * FROM kritik_saran ORDER BY create_at DES
                             Toggle dark mode
                             <div class="tooltip-arrow" data-popper-arrow></div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -151,56 +148,10 @@ $result = mysqli_query($conn, "SELECT * FROM kritik_saran ORDER BY create_at DES
                                                 data-nama="<?php echo htmlspecialchars($row['nama']); ?>"
                                                 data-kritik="<?php echo htmlspecialchars($row['kritik']); ?>"
                                                 data-saran="<?php echo htmlspecialchars($row['saran']); ?>"
+                                                data-gambar="<?php echo htmlspecialchars($row['gambar']); ?>"
                                                 class="block text-white bg-green-700 dark:bg-green-800 hover:bg-green-800 dark:hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
                                                 Detail
                                             </button>
-
-                                            <div id="crud-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-[calc(100%-1rem)] max-h-full">
-                                                <div class="relative p-4 w-full max-w-md max-h-full">
-                                                    <div class="relative bg-white dark:bg-gray-800 rounded-lg shadow">
-                                                        <div class="flex items-center justify-between p-4 border-b dark:border-gray-700 rounded-t">
-                                                            <h3 class="text-base md:text-lg  font-semibold text-black dark:text-white">
-                                                                Detail Kritik dan Saran dari <span id="modal-nama"></span>
-                                                            </h3>
-
-                                                            <button type="button" class="text-gray-400 dark:text-gray-300 bg-transparent hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center" data-modal-toggle="crud-modal">
-                                                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                                                </svg>
-                                                                <span class="sr-only">Close modal</span>
-                                                            </button>
-                                                        </div>
-                                                        <div class="p-4">
-                                                            <div class="mb-4">
-                                                                <label for="kritik" class="block text-base font-medium text-gray-900 dark:text-gray-300">Kritik</label>
-                                                                <p id="modal-kritik" class="text-sm border bg-white dark:bg-gray-700  p-2 rounded-lg text-gray-900 dark:text-gray-200 border-gray-300 dark:border-gray-600">
-                                                                    <!-- Kritik akan diinsert di sini -->
-                                                                </p>
-                                                            </div>
-                                                            <div class="mb-4">
-                                                                <label for="saran" class="block text-base font-medium text-gray-900 dark:text-gray-300">Saran</label>
-                                                                <p id="modal-saran" class="text-sm border bg-white dark:bg-gray-700  p-2 rounded-lg text-gray-900 dark:text-gray-200 border-gray-300 dark:border-gray-600">
-                                                                    <!-- Saran akan diinsert di sini -->
-                                                                </p>
-                                                            </div>
-                                                            <form action="proses_balasan.php" method="POST">
-                                                                <input type="hidden" name="id" id="modal-id" value="" />
-                                                                <div class="mb-4">
-                                                                    <label for="balasan" class="block text-sm font-medium text-gray-900 dark:text-gray-300">Balasan</label>
-                                                                    <textarea
-                                                                        id="balasan"
-                                                                        name="balasan"
-                                                                        rows="4"
-                                                                        class="block w-full px-4 py-2 text-base text-gray-900 bg-white dark:bg-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-blue-500 dark:focus:border-blue-400"
-                                                                        placeholder="Masukkan balasan..." required></textarea>
-                                                                </div>
-                                                                <button type="submit" class="inline-block px-6 py-2 text-white bg-green-500 hover:bg-green-600 dark:bg-green-500 dark:hover:bg-green-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:ring-offset-2">Kirim Balasan</button>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                            </div>
                                         </td>
                                     </tr>
                                 <?php endwhile; ?>
@@ -230,6 +181,59 @@ $result = mysqli_query($conn, "SELECT * FROM kritik_saran ORDER BY create_at DES
         </div>
     </div>
 
+    <div id="crud-modal" tabindex="-1" aria-hidden="true" class="fixed inset-0 z-50 hidden bg-gray-800 bg-opacity-50 flex items-center justify-center">
+        <div class="relative bg-white dark:bg-gray-800 rounded-lg shadow-lg w-full max-w-3xl max-h-[90vh] overflow-hidden">
+            <!-- Header Modal -->
+            <div class="flex items-center justify-between p-4 border-b dark:border-gray-700">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                    Detail Kritik dan Saran dari <span id="modal-nama"></span>
+                </h3>
+                <button type="button" class="text-gray-400 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-white rounded-lg p-1" data-modal-toggle="crud-modal">
+                    <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Body Modal -->
+            <div class="p-4 overflow-y-auto max-h-[70vh]">
+                <div class="mb-4">
+                    <label for="kritik" class="block text-base font-medium text-gray-900 dark:text-gray-300">Kritik</label>
+                    <p id="modal-kritik" class="text-sm bg-white dark:bg-gray-700 p-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-200">
+                        <!-- Kritik akan diinsert di sini -->
+                    </p>
+                </div>
+                <div class="mb-4">
+                    <label for="saran" class="block text-base font-medium text-gray-900 dark:text-gray-300">Saran</label>
+                    <p id="modal-saran" class="text-sm bg-white dark:bg-gray-700 p-2 rounded-lg border border-gray-300 dark:border-gray-600 text-gray-900 dark:text-gray-200">
+                        <!-- Saran akan diinsert di sini -->
+                    </p>
+                </div>
+                <div class="mb-4">
+                    <label for="gambar" class="block text-base font-medium text-gray-900 dark:text-gray-300">Gambar</label>
+                    <div class="text-center">
+                        <img id="modal-gambar" src="" alt="Gambar yang diunggah" class="w-full max-w-sm border bg-white dark:bg-gray-700 rounded-lg text-gray-900 dark:text-gray-200 border-gray-300 dark:border-gray-600" />
+                    </div>
+                </div>
+                <form action="proses_balasan.php" method="POST">
+                    <input type="hidden" name="id" id="modal-id" value="" />
+                    <div class="mb-4">
+                        <label for="balasan" class="block text-sm font-medium text-gray-900 dark:text-gray-300">Balasan</label>
+                        <textarea
+                            id="balasan"
+                            name="balasan"
+                            rows="4"
+                            class="block w-full px-4 py-2 text-base text-gray-900 bg-white dark:bg-gray-700 dark:text-gray-200 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Masukkan balasan..." required></textarea>
+                    </div>
+                    <button type="submit" class="w-full px-6 py-2 text-white bg-green-500 hover:bg-green-600 dark:bg-green-500 dark:hover:bg-green-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400">
+                        Kirim Balasan
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Event listener untuk semua tombol dengan data-modal-toggle
         document.querySelectorAll("[data-modal-toggle='crud-modal']").forEach(button => {
@@ -239,12 +243,22 @@ $result = mysqli_query($conn, "SELECT * FROM kritik_saran ORDER BY create_at DES
                 const kritik = this.getAttribute("data-kritik");
                 const saran = this.getAttribute("data-saran");
                 const id = this.getAttribute("data-id");
+                const gambar = this.getAttribute("data-gambar"); // Ambil path gambar
 
                 // Masukkan data ke dalam modal
                 document.getElementById("modal-nama").textContent = nama;
                 document.getElementById("modal-kritik").textContent = kritik;
                 document.getElementById("modal-saran").textContent = saran;
                 document.getElementById("modal-id").value = id;
+
+                // Perbarui src untuk gambar
+                const modalGambar = document.getElementById("modal-gambar");
+                if (gambar) {
+                    modalGambar.src = gambar;
+                    modalGambar.style.display = "block"; // Tampilkan gambar
+                } else {
+                    modalGambar.style.display = "none"; // Sembunyikan jika tidak ada gambar
+                }
 
                 // Tampilkan modal
                 document.getElementById("crud-modal").classList.remove("hidden");
@@ -258,38 +272,38 @@ $result = mysqli_query($conn, "SELECT * FROM kritik_saran ORDER BY create_at DES
                 document.getElementById("crud-modal").classList.add("hidden");
             });
         });
-    </script>
-    <script>
-        // Ambil elemen tombol toggle dan ikon
-        const themeToggle = document.getElementById('theme-toggle');
-        const darkIcon = document.getElementById('theme-toggle-dark-icon');
-        const lightIcon = document.getElementById('theme-toggle-light-icon');
 
-        // Simpan tema di localStorage
-        const currentTheme = localStorage.getItem('theme');
-        if (currentTheme === 'dark') {
-            document.documentElement.classList.add('dark');
-            darkIcon.classList.remove('hidden');
-        } else {
-            document.documentElement.classList.remove('dark');
-            lightIcon.classList.remove('hidden');
-        }
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ambil elemen tombol toggle dan ikon
+            const themeToggle = document.getElementById('theme-toggle');
+            const darkIcon = document.getElementById('theme-toggle-dark-icon');
+            const lightIcon = document.getElementById('theme-toggle-light-icon');
 
-        // Toggle dark mode
-        themeToggle.addEventListener('click', () => {
-            document.documentElement.classList.toggle('dark');
-            if (document.documentElement.classList.contains('dark')) {
-                localStorage.setItem('theme', 'dark');
+            // Simpan tema di localStorage
+            const currentTheme = localStorage.getItem('theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.classList.add('dark');
                 darkIcon.classList.remove('hidden');
-                lightIcon.classList.add('hidden');
             } else {
-                localStorage.setItem('theme', 'light');
-                darkIcon.classList.add('hidden');
+                document.documentElement.classList.remove('dark');
                 lightIcon.classList.remove('hidden');
             }
+
+            // Toggle dark mode
+            themeToggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('dark');
+                if (document.documentElement.classList.contains('dark')) {
+                    localStorage.setItem('theme', 'dark');
+                    darkIcon.classList.remove('hidden');
+                    lightIcon.classList.add('hidden');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    darkIcon.classList.add('hidden');
+                    lightIcon.classList.remove('hidden');
+                }
+            });
         });
-    </script>
-    <script>
+
         document.getElementById('logout-link').addEventListener('click', function(event) {
             event.preventDefault(); // Mencegah aksi default link
 

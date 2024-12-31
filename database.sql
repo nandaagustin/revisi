@@ -6,12 +6,13 @@ CREATE TABLE admin(
     password varchar(20) not null
 );
 CREATE TABLE kritik_saran (
-    id int auto_increment PRIMARY KEY,
-    nama varchar(20) not null,
-    kritik varchar(255) not null,
-    saran varchar(255) not null,
-    balasan varchar(255) default null,
-    create_at timestamp default current_timestamp
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(20) NOT NULL,
+    kritik VARCHAR(255) NOT NULL,
+    saran VARCHAR(255) NOT NULL,
+    gambar VARCHAR(255) DEFAULT NULL,
+    balasan VARCHAR(255) DEFAULT NULL,
+    create_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 INSERT INTO admin(username, password) values ('admin1', 'admin1');

@@ -66,11 +66,10 @@ $status = isset($_GET['status_kirim']) ? $_GET['status_kirim'] : '';
                 </script>
             <?php endif; ?>
 
-            <!-- Close Button -->
             <div class="flex justify-end mt-2">
                 <a href="login.php">
-                    <svg xmlns="http://www.w3.org/2000/svg" height="23" width="20.5" viewBox="0 0 448 512">
-                        <path fill="green"
+                    <svg xmlns="http://www.w3.org/2000/svg" height="25" width="24.5" viewBox="0 0 448 512" class="text-green-600">
+                        <path fill="currentColor"
                             d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
                     </svg>
                 </a>
@@ -83,7 +82,7 @@ $status = isset($_GET['status_kirim']) ? $_GET['status_kirim'] : '';
 
             <!-- Form -->
             <div class="space-y-6">
-                <form action="proses_kritik.php" method="post">
+                <form action="proses_kritik.php" method="post" enctype="multipart/form-data">
                     <!-- Name Input -->
                     <div>
                         <label for="nama" class="block mb-2 text-sm font-medium text-gray-900">Nama</label>
@@ -108,6 +107,17 @@ $status = isset($_GET['status_kirim']) ? $_GET['status_kirim'] : '';
                             placeholder="Masukkan Saran Anda!" required></textarea>
                     </div>
 
+                    <div>
+                        <label for="gambar" class="block mb-2 text-sm font-medium text-gray-900">Unggah Gambar</label>
+                        <label>
+                            <div class="mb-5 w-full h-11 rounded-lg border border-green-500 bg-gray-50 items-center inline-flex">
+                                <div class="flex w-28 h-11 px-2 flex-col bg-green-700 rounded-lg shadow text-white text-sm font-semibold leading-4 items-center justify-center cursor-pointer focus:outline-none">Choose File</div>
+                                <h2 id="file-name" class="text-gray-400 text-sm font-normal pl-6">No file chosen</h2>
+                                <input type="file" hidden id="gambar" name="gambar" onchange="updateFileName()" />
+                            </div>
+                        </label>
+                    </div>
+
                     <!-- Submit Button -->
                     <div class="flex justify-center mt-8">
                         <button type="submit"
@@ -118,7 +128,6 @@ $status = isset($_GET['status_kirim']) ? $_GET['status_kirim'] : '';
                 </form>
             </div>
         </div>
-
     </div>
     <div class="bg-gradient-to-r from-green-200 via-green-100 to-blue-200 px-8 lg:px-32 pb-24">
         <div class="text-center pt-9 pb-10 lg:pt-16 ">
@@ -162,12 +171,22 @@ $status = isset($_GET['status_kirim']) ? $_GET['status_kirim'] : '';
                     <!-- Kritik & Saran -->
                     <div class="lg:mb-4 mb-3">
                         <p class="text-gray-700 mb-2 text-sm md:text-base">
-                            <span class="text-green-700 ">Kritik : </span> <?php echo $row['kritik']; ?>
+                            <span class="text-green-700">Kritik: </span> <?php echo htmlspecialchars($row['kritik']); ?>
                         </p>
-                        <p class="text-gray-700 text-sm md:text-base">
-                            <span class="text-blue-700 ">Saran : </span> <?php echo $row['saran']; ?>
+                        <p class="text-gray-700 mb-2 text-sm md:text-base">
+                            <span class="text-blue-700">Saran: </span> <?php echo htmlspecialchars($row['saran']); ?>
                         </p>
+                        <?php if (!empty($row['gambar'])): ?>
+                            <div class="mt-3">
+                                <p class="text-gray-700 mb-2 text-sm md:text-base">
+                                    <span class="text-purple-700">Gambar: </span>
+                                </p>
+                                <img src="<?php echo htmlspecialchars($row['gambar']); ?>" alt="Gambar yang diunggah"
+                                    class="w-full max-w-xs rounded-lg shadow-md border border-gray-300">
+                            </div>
+                        <?php endif; ?>
                     </div>
+
                     <!-- Balasan Section -->
                     <?php if ($row['balasan']) : ?>
                         <div class="mt-6 bg-green-50 border border-green-300 rounded-lg p-4">
@@ -214,14 +233,11 @@ $status = isset($_GET['status_kirim']) ? $_GET['status_kirim'] : '';
             </div>
         </div>
         <div class="flex  justify-center pb-16">
-            
             <div class="lg:w-[900px] lg:h-[700px] w-[300px] h-[400px]">
-            <p class="lg:text-3xl text-lg font-bold text-green-700 py-5 text-center">Lokasi Kantor Kecamatan Bantarbolang</p>
-            <iframe class="w-full h-full" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.7875193353407!2d109.37563087481068!3d-7.034242092967677!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fe809d63ff30b%3A0x6526ecbee267187!2sKantor%20Kecamatan%20Bantarbolang!5e0!3m2!1sid!2sid!4v1734242374914!5m2!1sid!2sid"  allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-
+                <p class="lg:text-3xl text-lg font-bold text-green-700 py-5 text-center">Lokasi Kantor Kecamatan Bantarbolang</p>
+                <iframe class="w-full h-full" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3959.7875193353407!2d109.37563087481068!3d-7.034242092967677!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6fe809d63ff30b%3A0x6526ecbee267187!2sKantor%20Kecamatan%20Bantarbolang!5e0!3m2!1sid!2sid!4v1734242374914!5m2!1sid!2sid" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
-
 
     </div>
     <!--Footer container-->
@@ -267,84 +283,84 @@ $status = isset($_GET['status_kirim']) ? $_GET['status_kirim'] : '';
             </div>
             <hr class="my-2 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-2" />
         </div>
-        <div class="container flex justify-center items-center space-x-2" >
+        <div class="container flex justify-center items-center space-x-2">
             <!-- Social media icons container -->
-          
-                <a
-                    href="https://facebook.com/bantarbolang17"
-                    type="button"
-                    class="rounded-full bg-transparent p-3 font-medium uppercase leading-normal text-surface transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-none focus:ring-0 dark:text-white dark:hover:bg-secondary-900"
-                    data-twe-ripple-init>
-                    <span class="[&>svg]:h-5 [&>svg]:w-5">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 320 512">
-                            <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
-                            <path
-                                d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
-                        </svg>
-                    </span>
-                </a>
 
-                <a
-                    href="https://bantarbolang.pemalangkab.go.id"
-                    type="button"
-                    class="rounded-full bg-transparent p-3 font-medium uppercase leading-normal text-surface transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-none focus:ring-0 dark:text-white dark:hover:bg-secondary-900"
-                    data-twe-ripple-init>
-                    <span class="mx-auto [&>svg]:h-5 [&>svg]:w-5">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 488 512">
-                            <path
-                                d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
-                        </svg>
-                    </span>
-                </a>
+            <a
+                href="https://facebook.com/bantarbolang17"
+                type="button"
+                class="rounded-full bg-transparent p-3 font-medium uppercase leading-normal hover:text-green-800 text-surface transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-none focus:ring-0 dark:text-white dark:hover:bg-secondary-900"
+                data-twe-ripple-init>
+                <span class="[&>svg]:h-5 [&>svg]:w-5">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 320 512">
+                        <!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc. -->
+                        <path
+                            d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z" />
+                    </svg>
+                </span>
+            </a>
 
-                <a
-                    href="https://www.instagram.com/kecbolang17/"
-                    type="button"
-                    class="rounded-full bg-transparent p-3 font-medium uppercase leading-normal text-surface transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-none focus:ring-0 dark:text-white dark:hover:bg-secondary-900"
-                    data-twe-ripple-init>
-                    <span class="mx-auto [&>svg]:h-5 [&>svg]:w-5">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 448 512">
-                            <path
-                                d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
-                        </svg>
-                    </span>
-                </a>
+            <a
+                href="https://bantarbolang.pemalangkab.go.id"
+                type="button"
+                class="rounded-full bg-transparent p-3 font-medium uppercase hover:text-green-800 leading-normal text-surface transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-none focus:ring-0 dark:text-white dark:hover:bg-secondary-900"
+                data-twe-ripple-init>
+                <span class="mx-auto [&>svg]:h-5 [&>svg]:w-5">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 488 512">
+                        <path
+                            d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z" />
+                    </svg>
+                </span>
+            </a>
 
-                <a
-                    href="https://twitter.com/kecbolang17"
-                    type="button"
-                    class="rounded-full bg-transparent p-3 font-medium uppercase leading-normal text-surface transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-none focus:ring-0 dark:text-white dark:hover:bg-secondary-900"
-                    data-twe-ripple-init>
-                    <span class="mx-auto [&>svg]:h-5 [&>svg]:w-5">
-                        <svg  aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M13.795 10.533 20.68 2h-3.073l-5.255 6.517L7.69 2H1l7.806 10.91L1.47 22h3.074l5.705-7.07L15.31 22H22l-8.205-11.467Zm-2.38 2.95L9.97 11.464 4.36 3.627h2.31l4.528 6.317 1.443 2.02 6.018 8.409h-2.31l-4.934-6.89Z" />
-                        </svg>
+            <a
+                href="https://www.instagram.com/kecbolang17/"
+                type="button"
+                class="rounded-full bg-transparent p-3 font-medium uppercase leading-normal text-surface transition duration-150 ease-in-out hover:bg-neutral-100 hover:text-green-800  focus:outline-none focus:ring-0 dark:text-white dark:hover:bg-secondary-900"
+                data-twe-ripple-init>
+                <span class="mx-auto [&>svg]:h-5 [&>svg]:w-5">
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="currentColor"
+                        viewBox="0 0 448 512">
+                        <path
+                            d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z" />
+                    </svg>
+                </span>
+            </a>
 
-                    </span>
-                </a>
+            <a
+                href="https://twitter.com/kecbolang17"
+                type="button"
+                class="rounded-full bg-transparent p-3 font-medium uppercase leading-normal text-surface transition duration-150 ease-in-out hover:bg-neutral-100 hover:text-green-800 focus:outline-none focus:ring-0 dark:text-white dark:hover:bg-secondary-900"
+                data-twe-ripple-init>
+                <span class="mx-auto [&>svg]:h-5 [&>svg]:w-5">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M13.795 10.533 20.68 2h-3.073l-5.255 6.517L7.69 2H1l7.806 10.91L1.47 22h3.074l5.705-7.07L15.31 22H22l-8.205-11.467Zm-2.38 2.95L9.97 11.464 4.36 3.627h2.31l4.528 6.317 1.443 2.02 6.018 8.409h-2.31l-4.934-6.89Z" />
+                    </svg>
 
-                <a
-                    href="https:// youtube.com/@kecbantarbolang17"
-                    type="button"
-                    class="rounded-full bg-transparent p-3 font-medium uppercase leading-normal text-surface transition duration-150 ease-in-out hover:bg-neutral-100 focus:outline-none focus:ring-0 dark:text-white dark:hover:bg-secondary-900"
-                    data-twe-ripple-init>
-                    <span class="mx-auto [&>svg]:h-5 [&>svg]:w-5">
-                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
-                            <path fill-rule="evenodd" d="M21.7 8.037a4.26 4.26 0 0 0-.789-1.964 2.84 2.84 0 0 0-1.984-.839c-2.767-.2-6.926-.2-6.926-.2s-4.157 0-6.928.2a2.836 2.836 0 0 0-1.983.839 4.225 4.225 0 0 0-.79 1.965 30.146 30.146 0 0 0-.2 3.206v1.5a30.12 30.12 0 0 0 .2 3.206c.094.712.364 1.39.784 1.972.604.536 1.38.837 2.187.848 1.583.151 6.731.2 6.731.2s4.161 0 6.928-.2a2.844 2.844 0 0 0 1.985-.84 4.27 4.27 0 0 0 .787-1.965 30.12 30.12 0 0 0 .2-3.206v-1.516a30.672 30.672 0 0 0-.202-3.206Zm-11.692 6.554v-5.62l5.4 2.819-5.4 2.801Z" clip-rule="evenodd" />
-                        </svg>
+                </span>
+            </a>
 
-                    </span>
-                </a>
-            
+            <a
+                href="https:// youtube.com/@kecbantarbolang17"
+                type="button"
+                class="rounded-full bg-transparent p-3 font-medium uppercase leading-normal text-surface transition duration-150 ease-in-out hover:bg-neutral-100 hover:text-green-800 focus:outline-none focus:ring-0 dark:text-white dark:hover:bg-secondary-900"
+                data-twe-ripple-init>
+                <span class="mx-auto [&>svg]:h-5 [&>svg]:w-5">
+                    <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M21.7 8.037a4.26 4.26 0 0 0-.789-1.964 2.84 2.84 0 0 0-1.984-.839c-2.767-.2-6.926-.2-6.926-.2s-4.157 0-6.928.2a2.836 2.836 0 0 0-1.983.839 4.225 4.225 0 0 0-.79 1.965 30.146 30.146 0 0 0-.2 3.206v1.5a30.12 30.12 0 0 0 .2 3.206c.094.712.364 1.39.784 1.972.604.536 1.38.837 2.187.848 1.583.151 6.731.2 6.731.2s4.161 0 6.928-.2a2.844 2.844 0 0 0 1.985-.84 4.27 4.27 0 0 0 .787-1.965 30.12 30.12 0 0 0 .2-3.206v-1.516a30.672 30.672 0 0 0-.202-3.206Zm-11.692 6.554v-5.62l5.4 2.819-5.4 2.801Z" clip-rule="evenodd" />
+                    </svg>
+
+                </span>
+            </a>
+
         </div>
 
         <!--Copyright section-->
@@ -368,12 +384,18 @@ $status = isset($_GET['status_kirim']) ? $_GET['status_kirim'] : '';
                 });
             }, {
                 threshold: 0.4
-            }); // Trigger when 50% of the element is visible
+            }); 
 
             items.forEach(item => {
                 observer.observe(item); // Observe each item
             });
         });
+
+        function updateFileName() {
+            const fileInput = document.getElementById('gambar');
+            const fileName = fileInput.files.length > 0 ? fileInput.files[0].name : 'No file chosen';
+            document.getElementById('file-name').textContent = fileName;
+        }
     </script>
 
 </body>
